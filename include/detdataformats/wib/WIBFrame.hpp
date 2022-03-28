@@ -242,7 +242,7 @@ struct ColdataSegment
           return adc1ch3_1 | adc1ch3_2 << 4;
       }
     }
-    throw std::range_error("Supplied WIB channel index is out of the allowed range.");
+    // throw std::range_error("Supplied WIB channel index is out of the allowed range.");
     return 0;
   }
 
@@ -320,7 +320,7 @@ private:
     auto segment_id = (adc / 2) * 2 + ch / 4;
 
     if (segment_id < 0 || segment_id > s_num_seg_per_block - 1) {
-        throw std::out_of_range("ADC index out of range");      
+        // throw std::out_of_range("ADC index out of range");
     }
     return segment_id;
   }
@@ -381,7 +381,7 @@ public:
   // ColdataBlock channel accessors
   uint16_t get_channel(const uint8_t block_num, const uint8_t adc, const uint8_t ch) const // NOLINT(build/unsigned)
   {
-    throw_if_invalid_block_index_(block_num);
+    // throw_if_invalid_block_index_(block_num);
     return m_blocks[block_num].get_channel(adc, ch);
   }
   uint16_t get_channel(const uint8_t block_num, const uint8_t ch) const // NOLINT(build/unsigned)
@@ -419,7 +419,7 @@ private:
   void throw_if_invalid_block_index_(const int block_num) const
   {
     if (block_num < 0 || block_num > s_num_block_per_frame - 1) {
-       throw std::out_of_range("FEMB index out of range");
+       // throw std::out_of_range("FEMB index out of range");
     }
   }
 
