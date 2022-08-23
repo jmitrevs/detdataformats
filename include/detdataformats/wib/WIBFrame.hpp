@@ -219,6 +219,7 @@ struct ColdataSegment
 
   uint16_t get_channel(const uint8_t adc, const uint8_t ch) const // NOLINT(build/unsigned)
   {
+    #pragma HLS inline
     if (adc % 2 == 0) {
       switch (ch % 4) {
         case 0:
@@ -368,7 +369,7 @@ public:
   }
   const ColdataBlock& get_block(const uint8_t b) const // NOLINT(build/unsigned)
   {
-    throw_if_invalid_block_index_(b);
+    // throw_if_invalid_block_index_(b);
     return m_blocks[b];
   }
 
@@ -381,6 +382,7 @@ public:
   // ColdataBlock channel accessors
   uint16_t get_channel(const uint8_t block_num, const uint8_t adc, const uint8_t ch) const // NOLINT(build/unsigned)
   {
+    #pragma HLS inline recursive
     // throw_if_invalid_block_index_(block_num);
     return m_blocks[block_num].get_channel(adc, ch);
   }
