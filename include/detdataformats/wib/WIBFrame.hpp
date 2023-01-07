@@ -306,6 +306,8 @@ struct ColdataBlock
 
   uint16_t get_channel(const uint8_t adc, const uint8_t ch) const // NOLINT(build/unsigned)
   {
+    #pragma HLS inline
+
     // Each segment houses one half (four channels) of two subsequent ADCs.
     return segments[get_segment_index_(adc, ch)].get_channel(adc, ch);
   }
@@ -382,8 +384,8 @@ public:
   // ColdataBlock channel accessors
   uint16_t get_channel(const uint8_t block_num, const uint8_t adc, const uint8_t ch) const // NOLINT(build/unsigned)
   {
-    #pragma HLS inline recursive
-    // throw_if_invalid_block_index_(block_num);
+    #pragma HLS inline
+    // // throw_if_invalid_block_index_(block_num);
     return m_blocks[block_num].get_channel(adc, ch);
   }
   uint16_t get_channel(const uint8_t block_num, const uint8_t ch) const // NOLINT(build/unsigned)
